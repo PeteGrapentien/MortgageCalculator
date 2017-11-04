@@ -6,7 +6,7 @@ package com.example.pete.mortgagecalculator;
 
 public class CalculatorViewModel {
 
-    public void calculateMortgage(float amount, float interest, float duration) {
-
+    public String calculateMortgage(double amount, double interest, double duration) {
+        return "1.0";
     }
 }
