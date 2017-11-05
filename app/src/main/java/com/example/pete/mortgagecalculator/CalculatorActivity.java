@@ -1,13 +1,13 @@
 package com.example.pete.mortgagecalculator;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -42,19 +42,13 @@ public class CalculatorActivity extends AppCompatActivity {
             interest = Double.valueOf(interestField.getText().toString());
             duration = Double.valueOf(durationField.getText().toString());
 
-            String alertMessage = "Your Monthly Payment is " + viewModel.calculateMortgage(amount, interest, duration);
-            AlertDialog alertDialog = new AlertDialog.Builder(CalculatorActivity.this).create();
-            alertDialog.setTitle("Monthly Payment");
-            alertDialog.setMessage(alertMessage);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
-                    "OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+            Intent intent = new Intent(CalculatorActivity.this, DisplayMortgageResultActivity.class);
+            intent.putExtra("amount", amount);
+            intent.putExtra("interest", interest);
+            intent.putExtra("duration", duration);
+            intent.putExtra("monthlyPayment", viewModel.calculateMortgage(amount, interest, duration));
 
-                        }
-                    });
-            alertDialog.show();
+            startActivity(intent);
         }
     };
 }
