@@ -14,9 +14,12 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.NumberFormat;
+
 public class CalculatorActivity extends AppCompatActivity {
 
     CalculatorViewModel viewModel;
+    NumberFormat formatter = NumberFormat.getCurrencyInstance();
     double amount;
     double interest;
     double duration;
@@ -51,12 +54,12 @@ public class CalculatorActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                resultView.setText(getMortgageResult());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                resultView.setText(getMortgageResult());
+
             }
         });
 
@@ -100,15 +103,19 @@ public class CalculatorActivity extends AppCompatActivity {
         amount = 100000;
         interest = 3.5;
         duration = 30;
-        amountField.setText(Double.toString(amount));
+
+        amountField.setText(formatter.format(amount).toString());
         interestField.setText(Double.toString(interest));
         durationField.setText(Double.toString(duration));
         resultView.setText(viewModel.calculateMortgage(amount, interest, duration));
     }
 
     private String getMortgageResult() {
-        if(!amountField.getText().toString().isEmpty()) {
-            amount = Double.valueOf(amountField.getText().toString());
+        String rawAmountString = amountField.getText().toString();
+        rawAmountString = rawAmountString.replaceAll("[$,]", "");
+
+        if(!rawAmountString.isEmpty()) {
+            amount = Double.parseDouble(rawAmountString);
         }
         else {
             amount = 0;
