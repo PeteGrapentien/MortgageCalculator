@@ -9,54 +9,54 @@
     <EditText
         android:id="@+id/text_amount"
         android:layout_width="0dp"
-        android:layout_height="44dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="$0"
-        android:textColor="@color/dullGray"
         android:fontFamily="sans-serif"
         android:gravity="center"
+        android:hint="$0"
+        android:inputType="numberDecimal"
+        android:textColor="@color/dullGray"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginTop="28dp"
         app:layout_constraintTop_toBottomOf="@+id/result_view" />
 
     <EditText
         android:id="@+id/text_interest"
         android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="0%"
-        android:gravity="center"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="45dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/text_duration"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="0%"
+        android:inputType="numberDecimal"
         android:textColor="@color/dullGray"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_duration" />
 
     <EditText
         android:id="@+id/text_duration"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="0"
-        android:gravity="center"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="45dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/text_amount"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="0"
+        android:inputType="numberDecimal"
         android:textColor="@color/dullGray"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_amount" />
 
     <TextView
         android:id="@+id/result_view"
@@ -72,6 +72,46 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Loan Amount"
+        app:layout_constraintBottom_toTopOf="@+id/text_amount"
+        app:layout_constraintTop_toBottomOf="@+id/result_view"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Interest Rate"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_interest"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_duration"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Duration in Years"
+        app:layout_constraintBottom_toTopOf="@+id/text_duration"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_amount"
+        app:layout_constraintVertical_bias="0.714" />
 
 </android.support.constraint.ConstraintLayout>
