@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -16,10 +21,10 @@ public class CalculatorActivity extends AppCompatActivity {
     double interest;
     double duration;
 
+    TextView resultView;
     EditText amountField;
     EditText interestField;
     EditText durationField;
-    Button calculateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,26 +34,97 @@ public class CalculatorActivity extends AppCompatActivity {
         amountField = (EditText) findViewById(R.id.text_amount);
         interestField = (EditText) findViewById(R.id.text_interest);
         durationField = (EditText) findViewById(R.id.text_duration);
-        calculateButton = (Button) findViewById(R.id.calculate_button);
+        resultView = (TextView) findViewById(R.id.result_view);
 
-        calculateButton.setOnClickListener(calculateListener);
         viewModel = new CalculatorViewModel();
+        setStartingValues();
+        setTextChangedListeners();
     }
 
-    private View.OnClickListener calculateListener = new View.OnClickListener() {
-        public void onClick(View v) {
+    private void setTextChangedListeners() {
 
+        amountField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                resultView.setText(getMortgageResult());
+            }
+        });
+
+        interestField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                resultView.setText(getMortgageResult());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        durationField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                resultView.setText(getMortgageResult());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void setStartingValues() {
+        amount = 100000;
+        interest = 3.5;
+        duration = 30;
+        amountField.setText(Double.toString(amount));
+        interestField.setText(Double.toString(interest));
+        durationField.setText(Double.toString(duration));
+        resultView.setText(viewModel.calculateMortgage(amount, interest, duration));
+    }
+
+    private String getMortgageResult() {
+        if(!amountField.getText().toString().isEmpty()) {
             amount = Double.valueOf(amountField.getText().toString());
-            interest = Double.valueOf(interestField.getText().toString());
-            duration = Double.valueOf(durationField.getText().toString());
-
-            Intent intent = new Intent(CalculatorActivity.this, DisplayMortgageResultActivity.class);
-            intent.putExtra("amount", amount);
-            intent.putExtra("interest", interest);
-            intent.putExtra("duration", duration);
-            intent.putExtra("monthlyPayment", viewModel.calculateMortgage(amount, interest, duration));
-
-            startActivity(intent);
         }
-    };
+        else {
+            amount = 0;
+        }
+        if(!interestField.getText().toString().isEmpty()) {
+            interest = Double.valueOf(interestField.getText().toString());
+        }
+        else {
+            interest = 0;
+        }
+        if(!durationField.getText().toString().isEmpty()) {
+            duration = Double.valueOf(durationField.getText().toString());
+        }
+        else {
+            duration = 0;
+        }
+        return viewModel.calculateMortgage(amount, interest, duration);
+    }
 }

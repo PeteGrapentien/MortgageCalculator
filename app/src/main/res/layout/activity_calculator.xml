@@ -14,13 +14,15 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="Amount"
+        android:hint="$0"
+        android:textColor="@color/dullGray"
+        android:fontFamily="sans-serif"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/result_view" />
 
     <EditText
         android:id="@+id/text_interest"
@@ -28,14 +30,15 @@
         android:layout_height="43dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="Interest"
+        android:hint="0%"
         android:gravity="center"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintTop_toBottomOf="@+id/text_duration"
+        android:textColor="@color/dullGray"
         app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
@@ -44,26 +47,31 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="Duration"
+        android:hint="0"
         android:gravity="center"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintTop_toBottomOf="@+id/text_amount"
+        android:textColor="@color/dullGray"
         app:layout_constraintHorizontal_bias="0.0" />
 
-    <Button
-        android:id="@+id/calculate_button"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="Calculate"
-        android:layout_marginTop="71dp"
-        app:layout_constraintTop_toBottomOf="@+id/text_interest"
+    <TextView
+        android:id="@+id/result_view"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:gravity="center"
+        android:text="Result"
+        android:textSize="20sp"
+        android:textColor="@color/greenGray"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_editor_absoluteY="44dp" />
 
 </android.support.constraint.ConstraintLayout>
