@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,6 +29,7 @@ public class CalculatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+        this.setTitle("Pete's Mortgage Calculator");
 
         amountField = (EditText) findViewById(R.id.text_amount);
         interestField = (EditText) findViewById(R.id.text_interest);
@@ -47,6 +51,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 resultView.setText(getMortgageResult());
             }
 
@@ -89,7 +94,6 @@ public class CalculatorActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void setStartingValues() {
@@ -100,10 +104,12 @@ public class CalculatorActivity extends AppCompatActivity {
         amountField.setText(formatter.format(amount).toString());
         interestField.setText(Double.toString(interest));
         durationField.setText(Double.toString(duration));
-        resultView.setText(viewModel.calculateMortgage(amount, interest, duration));
+        resultView.setText(viewModel.calculateMonthlyMortgage(amount, interest, duration));
     }
 
     private String getMortgageResult() {
+        String nullValueResult = "$0.00 / $0.00";
+
         String rawAmountString = amountField.getText().toString();
         rawAmountString = rawAmountString.replaceAll("[$,]", "");
 
@@ -111,20 +117,28 @@ public class CalculatorActivity extends AppCompatActivity {
             amount = Double.parseDouble(rawAmountString);
         }
         else {
-            amount = 0;
+            return nullValueResult;
         }
         if(!interestField.getText().toString().isEmpty()) {
             interest = Double.valueOf(interestField.getText().toString());
         }
         else {
-            interest = 0;
+            return nullValueResult;
         }
         if(!durationField.getText().toString().isEmpty()) {
             duration = Double.valueOf(durationField.getText().toString());
         }
         else {
-            duration = 0;
+            return nullValueResult;
         }
-        return viewModel.calculateMortgage(amount, interest, duration);
+        return viewModel.calculateMonthlyMortgage(amount, interest, duration);
+    }
+
+    private void hideSoftKeyboard() {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) this.getSystemService(
+                        this.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                this.getCurrentFocus().getWindowToken(), 0);
     }
 }

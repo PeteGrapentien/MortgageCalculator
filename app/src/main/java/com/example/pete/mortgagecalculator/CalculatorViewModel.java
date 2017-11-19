@@ -8,16 +8,16 @@ import java.text.NumberFormat;
 
 public class CalculatorViewModel {
 
-    public String calculateMortgage(double amount, double interest, double duration) {
-            interest /= 100.0;
-            double monthlyRate = interest / 12.0;
-            double termInMonths = duration * 12;
-            double monthlyPayment =
+    public String calculateMonthlyMortgage(double amount, double interest, double duration) {
+
+        interest /= 100.0;
+        double monthlyRate = interest / 12.0;
+        double termInMonths = duration * 12;
+        double monthlyPayment =
                     (amount*monthlyRate) /
                             (1-Math.pow(1+monthlyRate, -termInMonths));
-
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
-        return formatter.format(monthlyPayment).toString();
+        return (formatter.format(monthlyPayment).toString()) + " / " + (formatter.format(monthlyPayment * (duration * 12)).toString()) ;
     }
 }
