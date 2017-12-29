@@ -1,11 +1,9 @@
 package com.example.pete.mortgagecalculator;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +27,7 @@ public class CalculatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
-        this.setTitle("Pete's Mortgage Calculator");
+        this.setTitle("Pete's Calc: Mortgage Calculator");
 
         amountField = (EditText) findViewById(R.id.text_amount);
         interestField = (EditText) findViewById(R.id.text_interest);
@@ -117,18 +115,21 @@ public class CalculatorActivity extends AppCompatActivity {
             amount = Double.parseDouble(rawAmountString);
         }
         else {
+            amount = 0;
             return nullValueResult;
         }
         if(!interestField.getText().toString().isEmpty()) {
             interest = Double.valueOf(interestField.getText().toString());
         }
         else {
+            interest = 0;
             return nullValueResult;
         }
         if(!durationField.getText().toString().isEmpty()) {
             duration = Double.valueOf(durationField.getText().toString());
         }
         else {
+            duration = 0;
             return nullValueResult;
         }
         return viewModel.calculateMonthlyMortgage(amount, interest, duration);
